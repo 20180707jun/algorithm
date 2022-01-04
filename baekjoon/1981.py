@@ -21,9 +21,9 @@ def solution(n, board):
 
     while s < e:
         mid = (s + e) // 2
-        breaked = True
+        flag = True
         for left in range(total_min, total_max + 1 - mid):
-            breaked = False
+            flag = False
             right = left + mid
             q = deque()
             q.append((0, 0, board[0][0], board[0][0]))
@@ -32,7 +32,7 @@ def solution(n, board):
             while q:
                 r, c, mi, ma = q.popleft()
                 if (r, c) == (n - 1, n - 1):
-                    breaked = True
+                    flag = True
                     break
                 for dr, dc in d:
                     nr, nc = dr + r, dc + c
@@ -45,10 +45,10 @@ def solution(n, board):
                             continue
                         q.append((nr, nc, new_mi, new_ma))
                         visit[nr][nc] = True
-            if breaked:
+            if flag:
                 break
 
-        if breaked:
+        if flag:
             e = mid
         else:
             s = mid + 1
